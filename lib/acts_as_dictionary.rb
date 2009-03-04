@@ -48,7 +48,7 @@ module ActsAsDictionary
         
         File.open(self.dic_file(field), "w+") do |file|
           items = self.find(:all) || []
-          items = items.inject([]){ |a, i| a += i[field].split("\n") }.uniq.sort
+          items = items.inject([]){ |a, i| a += i[field].split("\n") rescue []}.uniq.sort
           file.write("#{items.size}\n#{items.join("\n")}")
         end
       end
