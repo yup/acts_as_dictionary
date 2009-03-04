@@ -3,7 +3,8 @@ require 'fileutils'
 namespace :dict do
   desc "Generate dictionaries for all models"
   task :generate => :environment do
-    base = "#{Rails.root}/app/models/"
+    root = Rails.root rescue RAILS_ROOT
+    base = "#{root}/app/models/"
     Dir["#{base}**/*.rb"].each do |file|
       default_model_name = file.gsub(/^#{base}([\w_\/\\]+)\.rb/, '\1').classify      
       model_name = default_model_name.split('::').last
